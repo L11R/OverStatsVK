@@ -22,6 +22,14 @@ func StartCommand(update vkapi.LPUpdate) {
 	log.Info("start command executed successful")
 }
 
+func DonateCommand(update vkapi.LPUpdate) {
+	msg := vkapi.NewMessage(vkapi.NewDstFromUserID(update.Message.FromID), "If you find this bot helpful, " +
+		"you can make small donation to help me pay server bills! https://paypal.me/krasovsky")
+	client.SendMessage(msg)
+
+	log.Info("donate command executed successful")
+}
+
 type Hero struct {
 	Name                string
 	TimePlayedInSeconds int
