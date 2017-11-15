@@ -78,7 +78,7 @@ func SaveCommand(update vkapi.LPUpdate) {
 			text = "Saved!"
 		}
 	} else {
-		text = "Example: save eu|us|kr|psn|xbl BattleTag#1337|ConsoleLogin (sic, hyphen!)"
+		text = "Example: save eu|us|kr|psn|xbl BattleTag#1337|ConsoleLogin"
 	}
 
 	msg := vkapi.NewMessage(vkapi.NewDstFromUserID(update.Message.FromID), text)
