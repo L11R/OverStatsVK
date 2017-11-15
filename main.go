@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/sirupsen/logrus"
 	"github.com/Dimonchik0036/vk-api"
+	"github.com/sirupsen/logrus"
 	r "gopkg.in/gorethink/gorethink.v3"
 	"os"
 	"strings"
@@ -79,13 +79,14 @@ func main() {
 			go HeroCommand(update)
 		}
 
-		if strings.HasPrefix(command, "ratingtop") {
-			commandLogger.Info("command ratingtop triggered")
-			if strings.HasSuffix(update.Message.Text, "console") {
-				go RatingTopCommand(update, "console")
-			} else {
-				go RatingTopCommand(update, "pc")
-			}
+		if strings.HasPrefix(update.Message.Text, "consoletop") {
+			commandLogger.Info("command consoletop triggered")
+			go RatingTopCommand(update, "console")
+		}
+
+		if strings.HasPrefix(update.Message.Text, "pctop") {
+			commandLogger.Info("command pctop triggered")
+			go RatingTopCommand(update, "pc")
 		}
 	}
 }
