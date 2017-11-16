@@ -99,7 +99,15 @@ func MeCommand(update vkapi.LPUpdate) {
 	}
 
 	log.Info("me command executed successful")
-	text := MakeSummary(user, place)
+
+	var text string
+	info := strings.Split(update.Message.Text, "_")
+
+	if len(info) == 1 {
+		text = MakeSummary(user, place, "CompetitiveStats")
+	} else if len(info) == 2 && info[1] == "quick" {
+		text = MakeSummary(user, place, "QuickPlayStats")
+	}
 
 	msg := vkapi.NewMessage(vkapi.NewDstFromUserID(update.Message.FromID), text)
 	client.SendMessage(msg)
@@ -113,8 +121,16 @@ func HeroCommand(update vkapi.LPUpdate) {
 	}
 
 	log.Info("h_ command executed successful")
-	hero := strings.Split(update.Message.Text, "_")[1]
-	text := MakeHeroSummary(hero, user)
+
+	var text string
+	info := strings.Split(update.Message.Text, "_")
+	hero := info[1]
+
+	if len(info) == 2 {
+		text = MakeHeroSummary(hero, "CompetitiveStats", user)
+	} else if len(info) == 3 && info[2] == "quick" {
+		text = MakeHeroSummary(hero, "QuickPlayStats", user)
+	}
 
 	msg := vkapi.NewMessage(vkapi.NewDstFromUserID(update.Message.FromID), text)
 	client.SendMessage(msg)
