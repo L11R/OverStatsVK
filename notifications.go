@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/Dimonchik0036/vk-api"
+	"strconv"
+	"strings"
 )
 
 func SessionReport(change Change) {
@@ -80,7 +82,8 @@ func SessionReport(change Change) {
 			text += AddDiffString("Ties", oldStats.Ties, newStats.Ties, diffStats.Ties)
 			text += AddDiffString("Level", oldStats.Level, newStats.Level, diffStats.Level)
 
-			msg := vkapi.NewMessage(vkapi.NewDstFromUserID(change.NewVal.Id), text)
+			id, _ := strconv.ParseInt(strings.Split(change.NewVal.Id, ":")[1], 10, 64)
+			msg := vkapi.NewMessage(vkapi.NewDstFromUserID(id), text)
 			client.SendMessage(msg)
 		}
 	}

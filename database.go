@@ -35,7 +35,7 @@ func InitConnectionPool() {
 	}
 }
 
-func GetUser(id int64) (User, error) {
+func GetUser(id string) (User, error) {
 	res, err := r.Table("users").Get(id).Run(session)
 	if err != nil {
 		return User{}, err
@@ -80,7 +80,7 @@ func GetRatingTop(platform string, limit int) ([]User, error) {
 	return top, nil
 }
 
-func GetRatingPlace(id int64) (Top, error) {
+func GetRatingPlace(id string) (Top, error) {
 	res, err := r.Do(
 		r.Table("users").OrderBy(r.OrderByOpts{Index: r.Desc("rating")}).OffsetsOf(r.Row.Field("id").Eq(id)).Nth(0),
 		r.Table("users").Count(),
@@ -104,7 +104,7 @@ func GetRatingPlace(id int64) (Top, error) {
 	return top, nil
 }
 
-func GetRank(id int64, index r.Term) (Top, error) {
+func GetRank(id string, index r.Term) (Top, error) {
 	res, err := r.Do(
 		r.Table("users").OrderBy(r.Desc(index)).OffsetsOf(r.Row.Field("id").Eq(id)).Nth(0),
 		r.Table("users").Count(index.Ne(0)),

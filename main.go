@@ -11,8 +11,9 @@ import (
 var log = logrus.New()
 
 var (
-	client  *vkapi.Client
-	session *r.Session
+	client     *vkapi.Client
+	session    *r.Session
+	dbPKPrefix = "vk:"
 )
 
 func main() {

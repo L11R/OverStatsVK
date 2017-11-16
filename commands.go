@@ -64,7 +64,7 @@ func SaveCommand(update vkapi.LPUpdate) {
 			text = "Player not found!"
 		} else {
 			_, err := InsertUser(User{
-				Id:      update.Message.FromID,
+				Id:      fmt.Sprint(dbPKPrefix, update.Message.FromID),
 				Profile: profile,
 				Region:  info[1],
 				Nick:    info[2],
@@ -86,13 +86,13 @@ func SaveCommand(update vkapi.LPUpdate) {
 }
 
 func MeCommand(update vkapi.LPUpdate) {
-	user, err := GetUser(update.Message.FromID)
+	user, err := GetUser(fmt.Sprint(dbPKPrefix, update.Message.FromID))
 	if err != nil {
 		log.Warn(err)
 		return
 	}
 
-	place, err := GetRatingPlace(update.Message.FromID)
+	place, err := GetRatingPlace(fmt.Sprint(dbPKPrefix, update.Message.FromID))
 	if err != nil {
 		log.Warn(err)
 		return
@@ -114,7 +114,7 @@ func MeCommand(update vkapi.LPUpdate) {
 }
 
 func HeroCommand(update vkapi.LPUpdate) {
-	user, err := GetUser(update.Message.FromID)
+	user, err := GetUser(fmt.Sprint(dbPKPrefix, update.Message.FromID))
 	if err != nil {
 		log.Warn(err)
 		return
