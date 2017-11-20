@@ -73,7 +73,7 @@ func SessionReport(change Change) {
 		}
 
 		if diffStats.Games != 0 {
-			log.Infof("sending report to %d", change.NewVal.Id)
+			log.Infof("sending report to %s", change.NewVal.Id)
 			text := "Session Report\n\n"
 
 			text += AddDiffString("Rating", oldStats.Rating, newStats.Rating, diffStats.Rating)
