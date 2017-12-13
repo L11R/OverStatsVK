@@ -11,7 +11,7 @@ import (
 
 // Make small text summary based on profile
 func MakeSummary(user User, top Top, mode string) string {
-	text := fmt.Sprintf("%s (%d sr / %d lvl)\n", user.Patron+user.Profile.Name, user.Profile.Rating, user.Profile.Prestige*100+user.Profile.Level)
+	text := fmt.Sprintf("%s (%d sr / %d lvl)\n", user.Patreon+user.Profile.Name, user.Profile.Rating, user.Profile.Prestige*100+user.Profile.Level)
 
 	var stats ovrstat.StatsCollection
 	if mode == "CompetitiveStats" {
